@@ -6,6 +6,8 @@
 
 ## 성능 개선 보고서
 
+![prev_performance](https://artinfo.s3.ap-northeast-2.amazonaws.com/prod/upload/1710/images/20241124/original/3wqTosmbi_H.1732424869490.png)
+
 ### 기존 성능
 
 | 변수명      | 측정값 |
@@ -16,15 +18,21 @@
 | CLS         | 0.418  |
 | Speed Index | 0.7s   |
 
+<br />
+
+---
+
+![prev_performance](https://artinfo.s3.ap-northeast-2.amazonaws.com/prod/upload/1710/images/20241124/original/Nrqvt5WjiNA.1732424945855.png)
+
 ### 개선 후 성능
 
 | 변수명      | 측정값 |
 | ----------- | ------ |
 | FCP         | 0.6s   |
-| LCP         | 1.9s   |
+| LCP         | 1.8s   |
 | TBT         | 0s     |
 | CLS         | 0.005  |
-| Speed Index | 0.8s   |
+| Speed Index | 1.2s   |
 
 ### 기존 코드의 문제점과 개선방법
 
