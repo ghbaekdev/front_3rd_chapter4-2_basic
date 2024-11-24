@@ -60,10 +60,6 @@ function displayProducts(products) {
 
 loadProducts();
 
-// for (let i = 0; i < 10000000; i++) {
-//     const temp = Math.sqrt(i) * Math.sqrt(i);
-// }
-
 function processHeavyOperation(startIndex, chunkSize) {
   const endIndex = Math.min(startIndex + chunkSize, 10000000);
 
