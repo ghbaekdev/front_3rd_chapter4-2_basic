@@ -59,30 +59,32 @@ function displayProducts(products) {
   });
 }
 
+loadProducts();
+
 // Simulate heavy operation. It could be a complex price calculation.
-// for (let i = 0; i < 10000000; i++) {
-//   const temp = Math.sqrt(i) * Math.sqrt(i);
-// }
+for (let i = 0; i < 10000000; i++) {
+  const temp = Math.sqrt(i) * Math.sqrt(i);
+}
 
-window.onload = () => {
-  let status = 'idle';
+// window.onload = () => {
+//   let status = 'idle';
 
-  let productSection = document.querySelector('#all-products');
+//   let productSection = document.querySelector('#all-products');
 
-  window.onscroll = () => {
-    let position =
-      productSection.getBoundingClientRect().top -
-      (window.scrollY + window.innerHeight);
+//   window.onscroll = () => {
+//     let position =
+//       productSection.getBoundingClientRect().top -
+//       (window.scrollY + window.innerHeight);
 
-    if (status == 'idle' && position <= 0) {
-      loadProducts();
+//     if (status == 'idle' && position <= 0) {
+//       loadProducts();
 
-      // Simulate heavy operation. It could be a complex price calculation. <-- need to improve this
-      // This is a blocking operation that will freeze the UI
-      // how to improve this: https://ko.javascript.info/event-loop <-- use event loop
-      for (let i = 0; i < 10000000; i++) {
-        const temp = Math.sqrt(i) * Math.sqrt(i);
-      }
-    }
-  };
-};
+//       // Simulate heavy operation. It could be a complex price calculation. <-- need to improve this
+//       // This is a blocking operation that will freeze the UI
+//       // how to improve this: https://ko.javascript.info/event-loop <-- use event loop
+//       for (let i = 0; i < 10000000; i++) {
+//         const temp = Math.sqrt(i) * Math.sqrt(i);
+//       }
+//     }
+//   };
+// };
