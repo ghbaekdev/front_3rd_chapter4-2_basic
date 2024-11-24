@@ -8,7 +8,7 @@
 
 ### 기존 성능
 
-<!-- ![prev_performance](/public/prev.png) -->
+![prev_performance](/public/prev.png)
 
 | 변수명      | 설명   |
 | ----------- | ------ |
