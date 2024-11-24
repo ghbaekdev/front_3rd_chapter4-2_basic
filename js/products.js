@@ -59,38 +59,23 @@ function displayProducts(products) {
   });
 }
 
-window.onload = () => {
-  let status = 'idle';
-  let productSection = document.querySelector('#all-products');
+loadProducts();
 
-  window.onscroll = () => {
-    let position =
-      productSection.getBoundingClientRect().top -
-      (window.scrollY + window.innerHeight);
+// 무거운 연산을 청크로 나누어 처리하는 함수
+function processHeavyOperation(startIndex, chunkSize) {
+  const endIndex = Math.min(startIndex + chunkSize, 10000000);
 
-    if (status == 'idle' && position <= 0) {
-      loadProducts();
-      status = 'calculating';
+  for (let i = startIndex; i < endIndex; i++) {
+    const temp = Math.sqrt(i) * Math.sqrt(i);
+  }
 
-      // Promise와 setTimeout을 사용한 비동기 처리
-      new Promise((resolve) => {
-        setTimeout(() => {
-          // 무거운 계산을 청크로 나누어 처리
-          for (let i = 0; i < 10000000; i++) {
-            const temp = Math.sqrt(i) * Math.sqrt(i);
-            if (i % 100000 === 0) {
-              // 매 100000번째 반복마다 다음 이벤트 루프로 넘김
-              setTimeout(() => {
-                console.log(`처리중: ${i / 100000}%`);
-              }, 0);
-            }
-          }
-          resolve();
-        }, 0);
-      }).then(() => {
-        status = 'idle';
-        console.log('계산 완료');
-      });
-    }
-  };
-};
+  if (endIndex < 10000000) {
+    // 다음 청크를 처리하기 위해 requestAnimationFrame 사용
+    requestAnimationFrame(() => {
+      processHeavyOperation(endIndex, chunkSize);
+    });
+  }
+}
+
+// 1000개 단위로 청크를 나누어 처리 시작
+processHeavyOperation(0, 1000);
