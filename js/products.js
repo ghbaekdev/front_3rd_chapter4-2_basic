@@ -61,7 +61,6 @@ function displayProducts(products) {
 
 loadProducts();
 
-// 무거운 연산을 청크로 나누어 처리하는 함수
 function processHeavyOperation(startIndex, chunkSize) {
   const endIndex = Math.min(startIndex + chunkSize, 10000000);
 
@@ -70,12 +69,10 @@ function processHeavyOperation(startIndex, chunkSize) {
   }
 
   if (endIndex < 10000000) {
-    // 다음 청크를 처리하기 위해 requestAnimationFrame 사용
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       processHeavyOperation(endIndex, chunkSize);
-    });
+    }, 0); // 또는 적절한 지연 시간 설정
   }
 }
 
-// 1000개 단위로 청크를 나누어 처리 시작
 processHeavyOperation(0, 1000);
