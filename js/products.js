@@ -59,32 +59,38 @@ function displayProducts(products) {
   });
 }
 
-loadProducts();
+window.onload = () => {
+  let status = 'idle';
+  let productSection = document.querySelector('#all-products');
 
-// Simulate heavy operation. It could be a complex price calculation.
-for (let i = 0; i < 10000000; i++) {
-  const temp = Math.sqrt(i) * Math.sqrt(i);
-}
+  window.onscroll = () => {
+    let position =
+      productSection.getBoundingClientRect().top -
+      (window.scrollY + window.innerHeight);
 
-// window.onload = () => {
-//   let status = 'idle';
+    if (status == 'idle' && position <= 0) {
+      loadProducts();
+      status = 'calculating';
 
-//   let productSection = document.querySelector('#all-products');
-
-//   window.onscroll = () => {
-//     let position =
-//       productSection.getBoundingClientRect().top -
-//       (window.scrollY + window.innerHeight);
-
-//     if (status == 'idle' && position <= 0) {
-//       loadProducts();
-
-//       // Simulate heavy operation. It could be a complex price calculation. <-- need to improve this
-//       // This is a blocking operation that will freeze the UI
-//       // how to improve this: https://ko.javascript.info/event-loop <-- use event loop
-//       for (let i = 0; i < 10000000; i++) {
-//         const temp = Math.sqrt(i) * Math.sqrt(i);
-//       }
-//     }
-//   };
-// };
+      // Promise와 setTimeout을 사용한 비동기 처리
+      new Promise((resolve) => {
+        setTimeout(() => {
+          // 무거운 계산을 청크로 나누어 처리
+          for (let i = 0; i < 10000000; i++) {
+            const temp = Math.sqrt(i) * Math.sqrt(i);
+            if (i % 100000 === 0) {
+              // 매 100000번째 반복마다 다음 이벤트 루프로 넘김
+              setTimeout(() => {
+                console.log(`처리중: ${i / 100000}%`);
+              }, 0);
+            }
+          }
+          resolve();
+        }, 0);
+      }).then(() => {
+        status = 'idle';
+        console.log('계산 완료');
+      });
+    }
+  };
+};
