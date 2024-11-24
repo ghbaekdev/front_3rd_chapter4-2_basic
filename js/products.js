@@ -28,7 +28,7 @@ function createProductElement(product) {
 
   productElement.innerHTML = `
     <div class="product-picture">
-      <img src="${product.image}" alt="product: ${product.title}" width="250" loading="lazy">
+      <img src="${product.image}" alt="product: ${product.title}" width="250" loading='lazy'>
     </div>
     <div class="product-info">
       <h5 class="categories">${product.category}</h5>
